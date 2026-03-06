@@ -1,0 +1,511 @@
+[gd_scene load_steps=19 format=3 uid="uid://cu7h0eew86she"]
+
+[ext_resource type="Script" path="res://Assets/Scenes/main_menu.gd" id="1_dy76o"]
+[ext_resource type="LabelSettings" uid="uid://cmhtmc70kii0m" path="res://Assets/TitleLabelSettings.tres" id="1_neovj"]
+[ext_resource type="PackedScene" uid="uid://cr41f5hfupjva" path="res://Assets/Scenes/transition_node.tscn" id="2_7n2ff"]
+[ext_resource type="PackedScene" uid="uid://dpch8vd55wsiy" path="res://Assets/Scenes/card.tscn" id="2_dvcnj"]
+[ext_resource type="Texture2D" uid="uid://bvcm5pa70bll6" path="res://Assets/Textures/felt.png" id="2_g1m8g"]
+[ext_resource type="Texture2D" uid="uid://ckitacn7wg1ey" path="res://Assets/Textures/DiamondPatternA.png" id="3_y3yoh"]
+[ext_resource type="FontFile" uid="uid://c5ge3lijolhgo" path="res://Assets/BoldPixels.ttf" id="5_t3t6v"]
+[ext_resource type="Texture2D" uid="uid://de5f75ytq5yg8" path="res://Assets/Textures/chip.png" id="6_d6bw6"]
+[ext_resource type="Script" path="res://Assets/Scenes/settings.gd" id="8_p6g6h"]
+[ext_resource type="Script" path="res://Assets/Scenes/rainbowFx.gd" id="8_qsgvh"]
+[ext_resource type="Theme" uid="uid://yxvydcg68iig" path="res://Assets/SettingsTheme.tres" id="11_abdvu"]
+
+[sub_resource type="Gradient" id="Gradient_t75ki"]
+offsets = PackedFloat32Array(0, 0.51341, 1)
+colors = PackedColorArray(0, 0, 0, 0.235294, 0, 0, 0, 0, 0, 0, 0, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yeok2"]
+gradient = SubResource("Gradient_t75ki")
+height = 648
+fill_to = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ibstr"]
+font = ExtResource("5_t3t6v")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_nesbl"]
+font = ExtResource("5_t3t6v")
+font_size = 56
+
+[sub_resource type="LabelSettings" id="LabelSettings_uajtp"]
+line_spacing = 5.0
+font = ExtResource("5_t3t6v")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_irbow"]
+font = ExtResource("5_t3t6v")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_lckrk"]
+font = ExtResource("5_t3t6v")
+font_size = 50
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dy76o")
+
+[node name="TransitionNode" parent="." instance=ExtResource("2_7n2ff")]
+layout_mode = 1
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(1.15514e-06, 0.636547, 0.362807, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_g1m8g")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Pattern" type="TextureRect" parent="Background"]
+visible = false
+self_modulate = Color(0, 0, 0, 0.145098)
+texture_repeat = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_y3yoh")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Shading" type="TextureRect" parent="Background"]
+modulate = Color(1, 1, 1, 0.631373)
+texture_repeat = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_yeok2")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="List" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -93.0
+offset_right = 144.0
+offset_bottom = 167.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Main/List"]
+layout_mode = 2
+text = "Blackjack"
+label_settings = ExtResource("1_neovj")
+horizontal_alignment = 1
+
+[node name="PlayBtn" type="Button" parent="Main/List"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Main/List/PlayBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+label_settings = SubResource("LabelSettings_ibstr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Main/List/PlayBtn"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = -4.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_d6bw6")
+expand_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Main/List/PlayBtn/TextureRect"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 251.0
+offset_right = 279.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_d6bw6")
+expand_mode = 5
+
+[node name="SettingsBtn" type="Button" parent="Main/List"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Main/List/SettingsBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_ibstr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RulesBtn" type="Button" parent="Main/List"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Main/List/RulesBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "How To Play"
+label_settings = SubResource("LabelSettings_ibstr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitBtn" type="Button" parent="Main/List"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Main/List/QuitBtn"]
+modulate = Color(1, 0.240133, 0.46179, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit Game"
+label_settings = SubResource("LabelSettings_ibstr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card" parent="Main" instance=ExtResource("2_dvcnj")]
+position = Vector2(320, 176)
+
+[node name="Card2" parent="Main" instance=ExtResource("2_dvcnj")]
+position = Vector2(448, 144)
+
+[node name="Card3" parent="Main" instance=ExtResource("2_dvcnj")]
+position = Vector2(576, 112)
+
+[node name="Card4" parent="Main" instance=ExtResource("2_dvcnj")]
+position = Vector2(704, 144)
+
+[node name="Card5" parent="Main" instance=ExtResource("2_dvcnj")]
+position = Vector2(832, 176)
+
+[node name="Help" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGshade" type="ColorRect" parent="Help"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="Card6" parent="Help" instance=ExtResource("2_dvcnj")]
+position = Vector2(197, 243)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Help"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 342.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Help/ScrollContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.76
+alignment = 1
+
+[node name="Label1" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "How To play"
+label_settings = SubResource("LabelSettings_nesbl")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "
+Get a hand value closer to 21 than the dealer without going over 21."
+label_settings = SubResource("LabelSettings_uajtp")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Start
+
+Player and dealer each receive two cards.
+
+One of the dealer’s cards remains face down."
+label_settings = SubResource("LabelSettings_uajtp")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player Actions
+
+Hit → Draw another card to increase your total.
+
+Stand → Keep your total and end your turn."
+label_settings = SubResource("LabelSettings_uajtp")
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dealer Rules
+
+After the player stands, the dealer:
+
+Must draw cards until reaching 17 or higher
+
+Must stand on 17 or higher
+
+If the dealer goes over 21, the player wins automatically"
+label_settings = SubResource("LabelSettings_uajtp")
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dealer Rules
+
+After the player stands, the dealer:
+
+Must draw cards until reaching 17 or higher
+
+Must stand on 17 or higher
+
+If the dealer goes over 21, the player wins automatically"
+label_settings = SubResource("LabelSettings_uajtp")
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Winning Conditions
+
+Player total is closer to 21 than the dealer → Player wins
+
+Player hits 21 exactly → Win unless Push (tie)
+
+Player total over 21 → Bust (lose instantly)
+
+Dealer total over 21 → Dealer busts (player wins)
+
+Same total → Push (tie)"
+label_settings = SubResource("LabelSettings_uajtp")
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Number cards (2–10) = face value
+
+Face cards (J, Q, K) = 10
+
+Ace (A) = 1 or 11, whichever is better for your hand"
+label_settings = SubResource("LabelSettings_uajtp")
+horizontal_alignment = 1
+
+[node name="Credits" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+label_settings = SubResource("LabelSettings_nesbl")
+horizontal_alignment = 1
+script = ExtResource("8_qsgvh")
+
+[node name="Label9" type="Label" parent="Help/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Aaron Stichter - Project Lead
+
+Matthew McMahon - Lead Programmer
+
+Riley Poulin - Artist / Programmer
+
+Brody Rines - Music Composer / QA Tester
+
+Juan Silva - Designer"
+label_settings = SubResource("LabelSettings_uajtp")
+horizontal_alignment = 1
+script = ExtResource("8_qsgvh")
+
+[node name="BackBtn" type="Button" parent="Help"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1158.0
+offset_top = -114.0
+offset_right = -855.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label2" type="Label" parent="Help/BackBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return"
+label_settings = SubResource("LabelSettings_irbow")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGshade2" type="ColorRect" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="BackBtn" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1158.0
+offset_top = -89.0
+offset_right = -855.0
+offset_bottom = -36.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label2" type="Label" parent="Settings/BackBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return"
+label_settings = SubResource("LabelSettings_lckrk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings2" type="Control" parent="Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = -132.5
+offset_right = 154.5
+offset_bottom = 132.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("8_p6g6h")
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings/Settings2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/Settings2/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("11_abdvu")
+
+[node name="Label" type="Label" parent="Settings/Settings2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("11_abdvu")
+text = "Volume"
+
+[node name="Volume" type="HSlider" parent="Settings/Settings2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("11_abdvu")
+value = 100.0
+rounded = true
+
+[node name="Mute" type="CheckBox" parent="Settings/Settings2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("11_abdvu")
+text = "Mute"
+
+[node name="AltMusic" type="CheckBox" parent="Settings/Settings2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("11_abdvu")
+text = "Alternate Music"
+
+[node name="Resolutions" type="OptionButton" parent="Settings/Settings2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("11_abdvu")
+item_count = 4
+selected = 2
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1280x720"
+popup/item_2/id = 2
+popup/item_3/text = "960x540"
+popup/item_3/id = 3
+
+[connection signal="value_changed" from="Settings/Settings2/MarginContainer/VBoxContainer/Volume" to="Settings/Settings2" method="_on_volume_value_changed"]
+[connection signal="toggled" from="Settings/Settings2/MarginContainer/VBoxContainer/Mute" to="Settings/Settings2" method="_on_mute_toggled"]
+[connection signal="toggled" from="Settings/Settings2/MarginContainer/VBoxContainer/AltMusic" to="Settings/Settings2" method="_on_alt_music_toggled"]
+[connection signal="item_selected" from="Settings/Settings2/MarginContainer/VBoxContainer/Resolutions" to="Settings/Settings2" method="_on_resolutions_item_selected"]

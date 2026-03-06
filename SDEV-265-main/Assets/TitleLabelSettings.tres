@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cmhtmc70kii0m"]
+
+[ext_resource type="FontFile" uid="uid://c5ge3lijolhgo" path="res://Assets/BoldPixels.ttf" id="1_4sbqh"]
+
+[resource]
+font = ExtResource("1_4sbqh")
+font_size = 70

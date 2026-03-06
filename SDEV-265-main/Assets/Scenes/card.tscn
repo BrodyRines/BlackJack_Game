@@ -1,0 +1,164 @@
+[gd_scene load_steps=10 format=3 uid="uid://dpch8vd55wsiy"]
+
+[ext_resource type="Script" path="res://Assets/Scenes/card.gd" id="1_fejg8"]
+[ext_resource type="AudioStream" uid="uid://ra7b7su0smsy" path="res://Assets/Audio/CardFlip.mp3" id="2_0r8fv"]
+[ext_resource type="SpriteFrames" uid="uid://bluufgfauwaxw" path="res://Assets/Scenes/cardSpriteFrames.tres" id="2_hnfpg"]
+[ext_resource type="FontFile" uid="uid://c5ge3lijolhgo" path="res://Assets/BoldPixels.ttf" id="3_ylow4"]
+
+[sub_resource type="Animation" id="Animation_v8f21"]
+resource_name = "InGameWobble"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0872665, -0.0872665, 0.0872665]
+}
+
+[sub_resource type="Animation" id="Animation_o6wdg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vwb7j"]
+resource_name = "flip"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(0, 2), Vector2(2, 2)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"setMidFlip"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6ltkw"]
+resource_name = "menu"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"mainMenuAnimLooped"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b13hs"]
+_data = {
+"InGameWobble": SubResource("Animation_v8f21"),
+"RESET": SubResource("Animation_o6wdg"),
+"flip": SubResource("Animation_vwb7j"),
+"menu": SubResource("Animation_6ltkw")
+}
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_fejg8")
+
+[node name="FlipSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0r8fv")
+volume_db = -5.073
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.9751, 2)
+sprite_frames = ExtResource("2_hnfpg")
+
+[node name="Control" type="Control" parent="AnimatedSprite2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -23.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 32.0
+
+[node name="HoverTextLabel" type="RichTextLabel" parent="AnimatedSprite2D/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -58.0
+offset_top = -17.0
+offset_right = 58.0
+grow_horizontal = 2
+tooltip_text = "
+"
+theme_override_fonts/normal_font = ExtResource("3_ylow4")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+
+[node name="Shadow" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+modulate = Color(0, 0, 0, 0.184314)
+show_behind_parent = true
+position = Vector2(3.5, 3.5)
+sprite_frames = ExtResource("2_hnfpg")
+
+[node name="WobblePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b13hs")
+}
+
+[node name="FlipPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b13hs")
+}
+
+[connection signal="mouse_entered" from="AnimatedSprite2D/Control" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="AnimatedSprite2D/Control" to="." method="_on_control_mouse_exited"]

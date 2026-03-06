@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr41f5hfupjva"]
+
+[ext_resource type="Script" path="res://Assets/Scenes/transition_node.gd" id="1_l0u4h"]
+
+[sub_resource type="Gradient" id="Gradient_hm4he"]
+offsets = PackedFloat32Array(0, 0.1, 0.9, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_62787"]
+gradient = SubResource("Gradient_hm4he")
+metadata/_snap_enabled = true
+
+[node name="TransitionNode" type="Control"]
+visible = false
+z_index = 1
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 298.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l0u4h")
+
+[node name="TransitionRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0383972, 0.0383972, 0.0383972, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1.05286e-07, 0.104015, 0.097005, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_62787")

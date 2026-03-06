@@ -1,0 +1,427 @@
+[gd_scene load_steps=19 format=3 uid="uid://ca21uqhdkecpl"]
+
+[ext_resource type="Texture2D" uid="uid://bvcm5pa70bll6" path="res://Assets/Textures/felt.png" id="2_kgc4o"]
+[ext_resource type="Texture2D" uid="uid://ckitacn7wg1ey" path="res://Assets/Textures/DiamondPatternA.png" id="3_0n1xj"]
+[ext_resource type="Script" path="res://Assets/Scenes/gameScript.gd" id="3_0pyxl"]
+[ext_resource type="FontFile" uid="uid://c5ge3lijolhgo" path="res://Assets/BoldPixels.ttf" id="4_5upt8"]
+[ext_resource type="PackedScene" uid="uid://dpch8vd55wsiy" path="res://Assets/Scenes/card.tscn" id="5_4l4rb"]
+[ext_resource type="Texture2D" uid="uid://de5f75ytq5yg8" path="res://Assets/Textures/chip.png" id="5_afrvm"]
+[ext_resource type="AudioStream" uid="uid://de6ya8djo81wt" path="res://Assets/Audio/Shuffle.mp3" id="6_0v468"]
+[ext_resource type="AudioStream" uid="uid://bt0c6a6daea74" path="res://Assets/Audio/Coins1.mp3" id="7_2ym5y"]
+[ext_resource type="AudioStream" uid="uid://beffpk2nfve8b" path="res://Assets/Audio/bankrupt.WAV" id="7_x0rbf"]
+[ext_resource type="AudioStream" uid="uid://8vkm45q5rhbj" path="res://Assets/Audio/Coins2.mp3" id="8_pif37"]
+
+[sub_resource type="Gradient" id="Gradient_jfjgi"]
+offsets = PackedFloat32Array(0, 0.51341, 1)
+colors = PackedColorArray(0, 0, 0, 0.235294, 0, 0, 0, 0, 0, 0, 0, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_slhub"]
+gradient = SubResource("Gradient_jfjgi")
+height = 648
+fill_to = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jx782"]
+font = ExtResource("4_5upt8")
+font_size = 60
+outline_size = 12
+outline_color = Color(0, 0, 0, 0)
+shadow_size = 12
+shadow_color = Color(0, 0, 0, 0.211765)
+shadow_offset = Vector2(6, 6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pihkp"]
+font = ExtResource("4_5upt8")
+font_size = 50
+shadow_size = 12
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5pmxs"]
+font = ExtResource("4_5upt8")
+font_size = 38
+outline_size = 12
+outline_color = Color(0, 0, 0, 0.447059)
+
+[sub_resource type="Theme" id="Theme_a3ehp"]
+default_font = ExtResource("4_5upt8")
+default_font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_ominm"]
+font = ExtResource("4_5upt8")
+font_size = 114
+outline_size = 16
+outline_color = Color(0, 0, 0, 0.572549)
+shadow_size = 32
+shadow_color = Color(0, 0, 0, 0.156863)
+shadow_offset = Vector2(16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_twkx8"]
+font = ExtResource("4_5upt8")
+font_size = 24
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(1.15514e-06, 0.636547, 0.362807, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_kgc4o")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Pattern" type="TextureRect" parent="Background"]
+visible = false
+self_modulate = Color(0, 0, 0, 0.145098)
+texture_repeat = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0n1xj")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Shading" type="TextureRect" parent="Background"]
+modulate = Color(1, 1, 1, 0.631373)
+texture_repeat = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_slhub")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_0pyxl")
+
+[node name="coins1sfx" type="AudioStreamPlayer" parent="Main"]
+stream = ExtResource("7_2ym5y")
+volume_db = -5.073
+
+[node name="coins2sfx" type="AudioStreamPlayer" parent="Main"]
+stream = ExtResource("8_pif37")
+
+[node name="ShuffleSfx" type="AudioStreamPlayer" parent="Main"]
+stream = ExtResource("6_0v468")
+volume_db = -3.805
+
+[node name="bankrupt" type="AudioStreamPlayer" parent="Main"]
+stream = ExtResource("7_x0rbf")
+volume_db = -6.64
+
+[node name="DealerPts" type="Label" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 224.0
+offset_top = -124.0
+offset_right = 508.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Dealer - 0"
+label_settings = SubResource("LabelSettings_jx782")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YouPts" type="Label" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 224.0
+offset_top = 76.0
+offset_right = 508.0
+offset_bottom = 142.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You - 0"
+label_settings = SubResource("LabelSettings_jx782")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChipCounter" type="Control" parent="Main"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -60.0
+offset_right = 206.0
+offset_bottom = -9.0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Main/ChipCounter"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 53.0
+grow_vertical = 2
+texture = ExtResource("5_afrvm")
+
+[node name="TextureRect" type="TextureRect" parent="Main/ChipCounter/TextureRect"]
+modulate = Color(0, 0, 0, 0.309804)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 57.0
+offset_bottom = 4.0
+grow_vertical = 2
+texture = ExtResource("5_afrvm")
+
+[node name="Label" type="Label" parent="Main/ChipCounter"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -141.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "2500"
+label_settings = SubResource("LabelSettings_pihkp")
+vertical_alignment = 1
+
+[node name="HitStandBtns" type="Control" parent="Main"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Stand" type="Button" parent="Main/HitStandBtns"]
+self_modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -24.0
+offset_right = 90.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Main/HitStandBtns/Stand"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.333279, 0.000683457, 0.887743, 0.627451)
+
+[node name="Label" type="Label" parent="Main/HitStandBtns/Stand"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Stand"
+label_settings = SubResource("LabelSettings_5pmxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hit" type="Button" parent="Main/HitStandBtns"]
+self_modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -24.0
+offset_right = -56.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Main/HitStandBtns/Hit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.627451, 0, 0.317647, 0.627451)
+
+[node name="Label" type="Label" parent="Main/HitStandBtns/Hit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hit"
+label_settings = SubResource("LabelSettings_5pmxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuyInOps" type="Control" parent="Main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Start" type="Button" parent="Main/BuyInOps"]
+self_modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -24.0
+offset_right = -56.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Main/BuyInOps/Start"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.635294, 0.996078, 0, 0.403922)
+
+[node name="Label" type="Label" parent="Main/BuyInOps/Start"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy in"
+label_settings = SubResource("LabelSettings_5pmxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChipInput" type="ColorRect" parent="Main/BuyInOps"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 558.0
+offset_top = 301.0
+offset_right = -348.0
+offset_bottom = -288.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.403922)
+
+[node name="SpinBox" type="SpinBox" parent="Main/BuyInOps/ChipInput"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -29.5
+offset_right = 122.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_a3ehp")
+max_value = 0.0
+custom_arrow_step = 10.0
+
+[node name="TextureRect" type="TextureRect" parent="Main/BuyInOps/ChipInput"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -22.5
+offset_right = 52.0
+offset_bottom = 23.5
+grow_vertical = 2
+texture = ExtResource("5_afrvm")
+
+[node name="Cards" type="Node2D" parent="Main"]
+
+[node name="Results" type="Label" parent="Main"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -71.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Push!"
+label_settings = SubResource("LabelSettings_ominm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Deck" parent="Main" instance=ExtResource("5_4l4rb")]
+position = Vector2(219, 325)
+
+[node name="ReturnToMenu" type="Button" parent="Main"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 0
+offset_left = -4.0
+offset_top = 8.0
+offset_right = 203.0
+offset_bottom = 43.0
+
+[node name="Label2" type="Label" parent="Main/ReturnToMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return to Menu"
+label_settings = SubResource("LabelSettings_twkx8")
+horizontal_alignment = 1
+vertical_alignment = 1

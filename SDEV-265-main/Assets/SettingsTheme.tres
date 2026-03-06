@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://yxvydcg68iig"]
+
+[ext_resource type="FontFile" uid="uid://c5ge3lijolhgo" path="res://Assets/BoldPixels.ttf" id="1_dys3f"]
+
+[resource]
+default_font = ExtResource("1_dys3f")
+default_font_size = 34
+CheckBox/constants/h_separation = 8
